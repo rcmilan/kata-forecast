@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(#ff7700),
+      to(#ffb700)
+    )
+    fixed;
+}

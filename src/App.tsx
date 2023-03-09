@@ -6,11 +6,10 @@ function App() {
     <div className="flex flex-col items-center">
       <Heading>Previsão do tempo</Heading>
 
-      <div className="m-10">
-        <SearchInput placeholder="insira aqui o nome da cidade" />
+      <div className="mt-6">
+        <SearchInput placeholder="Insira aqui o nome da cidade" width="w-96" />
+        <hr className="mt-10 mb-10 flex-grow border-t border-white" />
       </div>
-      <div>02</div>
-      <div>03</div>
     </div>
   );
 }

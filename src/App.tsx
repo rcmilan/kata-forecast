@@ -1,5 +1,6 @@
 import Heading from "./components/heading";
 import SearchInput from "./components/searchInput";
+import Subtitle from "./components/subtitle";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         <SearchInput placeholder="Insira aqui o nome da cidade" width="w-96" />
         <hr className="mt-10 mb-10 flex-grow border-t border-white" />
       </div>
+      <Subtitle />
     </div>
   );
 }

@@ -1,4 +1,5 @@
-import { TableRowProps } from "../Types";
+import { TableRowProps } from "../types";
+
 
 const Index: React.FC<TableRowProps> = ({ data }) => {
   return (

@@ -2,9 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { BsSortAlphaDown, BsSortAlphaUp } from "react-icons/bs";
 import ContentRow from "./contentRow";
-import { TableProps } from "./Types";
+import { TableProps } from "./types";
 
-const Table: React.FC<TableProps> = ({ data }) => {
+const Index: React.FC<TableProps> = ({ data }) => {
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
   const sortedData = [...data].sort((a, b) => {
     if (sortDirection === "asc") {
@@ -52,4 +52,4 @@ const Table: React.FC<TableProps> = ({ data }) => {
   );
 };
 
-export default Table;
+export default Index;

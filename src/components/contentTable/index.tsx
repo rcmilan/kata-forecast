@@ -7,13 +7,15 @@ import {
   TableProps,
   TableRowProps,
 } from "./types";
-import { smallColumn, largeColumn } from "./constants";
+
+const smallColumn = "w-1/5";
+const largeColumn = "w-3/5";
 
 const ContentHeader: React.FC<TableHeaderProps> = ({
   sortDirection,
   onSortToggle,
 }) => {
-  const getSortIcon = (columnKey: ColumnKey) => {
+  const getSortIcon = () => {
     const IconComponent =
       sortDirection === "asc" ? BsSortNumericDown : BsSortNumericUp;
     return <IconComponent className="w-4 h-4 inline-block mr-1" />;
@@ -24,7 +26,7 @@ const ContentHeader: React.FC<TableHeaderProps> = ({
       className={`${smallColumn} cursor-pointer flex items-center`}
       onClick={() => onSortToggle(columnKey)}
     >
-      {getSortIcon(columnKey)}
+      {getSortIcon()}
       {columnKey}
     </div>
   );

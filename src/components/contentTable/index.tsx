@@ -17,8 +17,8 @@ interface TableHeaderProps {
   onSortToggle: (column: ColumnKey) => void;
 }
 
-const smallColumn = "w-1/5";
-const largeColumn = "w-3/5";
+const minMaxColumn = "w-1/5";
+const cityNameColumn = "w-3/5";
 
 const ContentHeader: React.FC<TableHeaderProps> = ({
   sortDirection,
@@ -32,7 +32,7 @@ const ContentHeader: React.FC<TableHeaderProps> = ({
 
   const HeaderColumn: React.FC<{ columnKey: ColumnKey }> = ({ columnKey }) => (
     <div
-      className={`${smallColumn} cursor-pointer flex items-center`}
+      className={`${minMaxColumn} cursor-pointer flex items-center`}
       onClick={() => onSortToggle(columnKey)}
     >
       {getSortIcon()}
@@ -44,16 +44,16 @@ const ContentHeader: React.FC<TableHeaderProps> = ({
     <div className="flex justify-between items-center px-4 py-2 text-black-100 text-sm font-small tracking-wider">
       <HeaderColumn columnKey="min" />
       <HeaderColumn columnKey="max" />
-      <div className={largeColumn}></div>
+      <div className={cityNameColumn}></div>
     </div>
   );
 };
 
 const ContentRow: React.FC<TableRowProps> = ({ data }) => (
   <div className="flex justify-between items-center font-medium py-2 px-4">
-    <div className={`${smallColumn}`}>{data.min}</div>
-    <div className={`${smallColumn}`}>{data.max}</div>
-    <div className={`${largeColumn}`}>{data.cityName}</div>
+    <div className={`${minMaxColumn}`}>{data.min}</div>
+    <div className={`${minMaxColumn}`}>{data.max}</div>
+    <div className={`${cityNameColumn}`}>{data.cityName}</div>
   </div>
 );
 

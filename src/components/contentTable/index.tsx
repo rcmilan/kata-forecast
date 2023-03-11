@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { BsSortAlphaDown, BsSortAlphaUp } from "react-icons/bs";
+import ContentHeader from "./contentHeader";
 import ContentRow from "./contentRow";
 import { TableProps } from "./types";
 
@@ -14,37 +14,16 @@ const Index: React.FC<TableProps> = ({ data }) => {
     }
   });
 
+  const handleSortToggle = () => {
+    setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+  };
+
   return (
-    <div className="w-full md:w-1/2">
-      <div className="flex justify-between items-center px-4 py-2 bg-gray-200 text-gray-600 text-sm font-medium tracking-wider">
-        <div
-          className="w-1/3 cursor-pointer flex items-center"
-          onClick={() =>
-            setSortDirection(sortDirection === "asc" ? "desc" : "asc")
-          }
-        >
-          {sortDirection === "asc" ? (
-            <BsSortAlphaDown className="w-4 h-4 inline-block mr-1" />
-          ) : (
-            <BsSortAlphaUp className="w-4 h-4 inline-block mr-1" />
-          )}
-          Column 1
-        </div>
-        <div
-          className="w-1/3 cursor-pointer flex items-center"
-          onClick={() =>
-            setSortDirection(sortDirection === "asc" ? "desc" : "asc")
-          }
-        >
-          {sortDirection === "asc" ? (
-            <BsSortAlphaDown className="w-4 h-4 inline-block mr-1" />
-          ) : (
-            <BsSortAlphaUp className="w-4 h-4 inline-block mr-1" />
-          )}
-          Column 2
-        </div>
-        <div className="w-1/3">Column 3</div>
-      </div>
+    <div className="w-full">
+      <ContentHeader
+        sortDirection={sortDirection}
+        onSortToggle={handleSortToggle}
+      />
       {sortedData.map((item) => (
         <ContentRow key={item.column1} data={item} />
       ))}

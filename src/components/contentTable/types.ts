@@ -11,3 +11,8 @@ export interface TableRowProps {
 export interface TableProps {
   data: TableData[];
 }
+
+export interface TableHeaderProps {
+  sortDirection: "asc" | "desc";
+  onSortToggle: () => void;
+}

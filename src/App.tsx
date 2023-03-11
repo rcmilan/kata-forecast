@@ -1,10 +1,11 @@
-import SummaryTable from "./components/summary";
+import { useState } from "react";
+import { useQuery } from "react-query";
+import { fixedCities } from "./domain/constants";
+import { getForecast } from "./api";
 import { RowData } from "./components/summary/types";
 import Heading from "./components/heading";
 import SearchInput from "./components/searchInput";
-import { useQuery } from "react-query";
-import { getForecast } from "./api";
-import { fixedCities } from "./domain/constants";
+import SummaryTable from "./components/summary";
 
 function App() {
   const citiesData = fixedCities.map((city) => ({
@@ -13,6 +14,7 @@ function App() {
     longitude: city.latlong[1],
   }));
 
+  const [searchTerm, setSearchTerm] = useState("");
   const { isLoading, isError, data, error } = useQuery(
     ["forecast", citiesData],
     () =>
@@ -21,30 +23,37 @@ function App() {
           getForecast(latitude, longitude)
         )
       ),
-    {
-      enabled: !!citiesData.length,
-    }
+    { enabled: !!citiesData.length }
   );
 
-  const tableProp: RowData[] = [];
+  const summaryData: RowData[] = [];
 
-  const RenderContents = () => {
+  const handleSearchTermChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const renderContents = () => {
     if (isLoading) return <div>Loading...</div>;
 
     if (isError) return <>Error: {error}</>;
 
-    return <SummaryTable data={tableProp} />;
+    return <SummaryTable data={summaryData} />;
   };
 
-  console.log(data);
+  console.log(searchTerm, data);
 
   return (
     <div className="flex flex-col items-center">
       <Heading>Previsão do tempo</Heading>
-      <div className="mt-5 w-1/2">
-        <SearchInput placeholder="Insira aqui o nome da cidade" />
+      <div className="mt-5 w-2/3">
+        <SearchInput
+          placeholder="Insira aqui o nome da cidade"
+          onChange={handleSearchTermChange}
+        />
         <hr className="mt-10 mb-10 flex-grow border-t border-white" />
-        <RenderContents />
+        {renderContents()}
       </div>
     </div>
   );

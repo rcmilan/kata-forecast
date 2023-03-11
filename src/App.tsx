@@ -1,8 +1,7 @@
-import ContentTable from "./components/contentTable";
-import { RowData } from "./components/contentTable/types";
+import SummaryTable from "./components/summary";
+import { RowData } from "./components/summary/types";
 import Heading from "./components/heading";
 import SearchInput from "./components/searchInput";
-import Subtitle from "./components/subtitle";
 
 function App() {
   const tableProp: RowData[] = [
@@ -24,10 +23,7 @@ function App() {
       <div className="mt-5 w-1/2">
         <SearchInput placeholder="Insira aqui o nome da cidade" />
         <hr className="mt-10 mb-10 flex-grow border-t border-white" />
-
-        <Subtitle text="Capitais" />
-
-        <ContentTable data={tableProp} />
+        <SummaryTable data={tableProp} />
       </div>
     </div>
   );

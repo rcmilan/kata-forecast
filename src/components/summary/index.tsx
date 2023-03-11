@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { BsSortNumericUp, BsSortNumericDown } from "react-icons/bs";
 import { RowData } from "./types";
 
+const minMaxColumn = "w-1/5";
+const cityNameColumn = "w-3/5";
+
 interface TableRowProps {
   data: RowData;
 }
@@ -17,8 +20,15 @@ interface TableHeaderProps {
   onSortToggle: (column: ColumnKey) => void;
 }
 
-const minMaxColumn = "w-1/5";
-const cityNameColumn = "w-3/5";
+interface SubtitleProps {
+  text: string;
+}
+
+const Subtitle = ({ text }: SubtitleProps) => (
+  <div>
+    <h2 className="text-white text-3xl font-semibold">{text}</h2>
+  </div>
+);
 
 const ContentHeader: React.FC<TableHeaderProps> = ({
   sortDirection,
@@ -57,7 +67,7 @@ const ContentRow: React.FC<TableRowProps> = ({ data }) => (
   </div>
 );
 
-const Index: React.FC<TableProps> = ({ data }) => {
+const Summary: React.FC<TableProps> = ({ data }) => {
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
   const [sortColumn, setSortColumn] = useState<ColumnKey>("min");
 
@@ -75,16 +85,19 @@ const Index: React.FC<TableProps> = ({ data }) => {
   };
 
   return (
-    <div className="w-full">
-      <ContentHeader
-        sortDirection={sortDirection}
-        onSortToggle={handleSortToggle}
-      />
-      {sortedData.map((item) => (
-        <ContentRow key={item.min} data={item} />
-      ))}
-    </div>
+    <>
+      <Subtitle text="Capitais" />
+      <div className="w-full">
+        <ContentHeader
+          sortDirection={sortDirection}
+          onSortToggle={handleSortToggle}
+        />
+        {sortedData.map((item) => (
+          <ContentRow key={item.min} data={item} />
+        ))}
+      </div>
+    </>
   );
 };
 
-export default Index;
+export default Summary;

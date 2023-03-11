@@ -1,6 +1,6 @@
 export interface TableData {
-  column1: string;
-  column2: string;
+  column1: number;
+  column2: number;
   column3: string;
 }
 

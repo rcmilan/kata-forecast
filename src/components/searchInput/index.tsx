@@ -10,7 +10,7 @@ function Index({ placeholder, width = "w-full", ...rest }: Props) {
   return (
     <div className={`relative ${width} px-5`}>
       <input
-        className="py-2 pl-2 pr-3 block w-full border border-gray-300 rounded-none leading-5 bg-white focus:outline-none focus:ring-2 focus:ring-orange-100 focus:border-orange-100 sm:max-w-sm"
+        className="py-2 pl-2 pr-3 block w-full border border-gray-300 rounded-none leading-5 bg-white focus:outline-none focus:ring-2 focus:ring-orange-100 focus:border-orange-100"
         placeholder={placeholder}
         {...rest}
       />

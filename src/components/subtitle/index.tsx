@@ -1,11 +1,13 @@
 import { InputHTMLAttributes } from "react";
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {}
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
+  text: string
+}
 
-function Index({ ...rest }: Props) {
+function Index({ text, ...rest }: Props) {
   return (
     <div {...rest}>
-      <h2 className="text-white text-3xl font-semibold">Capitais</h2>
+      <h2 className="text-white text-3xl font-semibold">{text}</h2>
     </div>
   );
 }

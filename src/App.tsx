@@ -1,21 +1,21 @@
 import ContentTable from "./components/contentTable";
-import { TableData } from "./components/contentTable/types";
+import { RowData } from "./components/contentTable/types";
 import Heading from "./components/heading";
 import SearchInput from "./components/searchInput";
 import Subtitle from "./components/subtitle";
 
 function App() {
-  const tableProp: TableData[] = [
-    { column1: 11, column2: 30, column3: "a" },
-    { column1: 12, column2: 29, column3: "b" },
-    { column1: 13, column2: 28, column3: "c" },
-    { column1: 14, column2: 27, column3: "d" },
-    { column1: 15, column2: 26, column3: "e" },
-    { column1: 16, column2: 25, column3: "f" },
-    { column1: 17, column2: 24, column3: "g" },
-    { column1: 18, column2: 23, column3: "h" },
-    { column1: 19, column2: 22, column3: "i" },
-    { column1: 20, column2: 21, column3: "j" },
+  const tableProp: RowData[] = [
+    { min: 11, max: 30, cityName: "a" },
+    { min: 12, max: 29, cityName: "b" },
+    { min: 13, max: 28, cityName: "c" },
+    { min: 14, max: 27, cityName: "d" },
+    { min: 15, max: 26, cityName: "e" },
+    { min: 16, max: 25, cityName: "f" },
+    { min: 17, max: 24, cityName: "g" },
+    { min: 18, max: 23, cityName: "h" },
+    { min: 19, max: 22, cityName: "i" },
+    { min: 20, max: 21, cityName: "j" },
   ];
 
   return (

@@ -1,69 +1,79 @@
 import React, { useState } from "react";
 import { BsSortNumericUp, BsSortNumericDown } from "react-icons/bs";
-import { largeColumn, smallColumn } from "./constants";
-import { TableProps, TableRowProps } from "./types";
+import {
+  ColumnKey,
+  RowData,
+  TableHeaderProps,
+  TableProps,
+  TableRowProps,
+} from "./types";
+import { smallColumn, largeColumn } from "./constants";
 
-const TableHeaderCell: React.FC<{
-  label: string;
-  onClick: () => void;
-  sortDirection: "asc" | "desc";
-}> = ({ label, onClick, sortDirection }) => {
-  return (
+const ContentHeader: React.FC<TableHeaderProps> = ({
+  sortDirection,
+  onSortToggle,
+}) => {
+  const getSortIcon = (columnKey: ColumnKey) => {
+    const IconComponent =
+      sortDirection === "asc" ? BsSortNumericDown : BsSortNumericUp;
+    return <IconComponent className="w-4 h-4 inline-block mr-1" />;
+  };
+
+  const HeaderColumn: React.FC<{ columnKey: ColumnKey }> = ({ columnKey }) => (
     <div
       className={`${smallColumn} cursor-pointer flex items-center`}
-      onClick={onClick}
+      onClick={() => onSortToggle(columnKey)}
     >
-      {sortDirection === "asc" ? (
-        <BsSortNumericUp className="w-4 h-4 inline-block mr-1" />
-      ) : (
-        <BsSortNumericDown className="w-4 h-4 inline-block mr-1" />
-      )}
-      {label}
+      {getSortIcon(columnKey)}
+      {columnKey}
     </div>
   );
-};
 
-const TableRow: React.FC<TableRowProps> = ({ data }) => {
   return (
-    <div className="flex justify-between items-center font-medium py-2 px-4">
-      <div className={`${smallColumn}`}>{data.column1}</div>
-      <div className={`${smallColumn}`}>{data.column2}</div>
-      <div className={`${largeColumn}`}>{data.column3}</div>
+    <div className="flex justify-between items-center px-4 py-2 text-black-100 text-sm font-small tracking-wider">
+      <HeaderColumn columnKey="min" />
+      <HeaderColumn columnKey="max" />
+      <div className={largeColumn}></div>
     </div>
   );
 };
 
-const Summary: React.FC<TableProps> = ({ data }) => {
+const ContentRow: React.FC<TableRowProps> = ({ data }) => (
+  <div className="flex justify-between items-center font-medium py-2 px-4">
+    <div className={`${smallColumn}`}>{data.min}</div>
+    <div className={`${smallColumn}`}>{data.max}</div>
+    <div className={`${largeColumn}`}>{data.cityName}</div>
+  </div>
+);
+
+const Index: React.FC<TableProps> = ({ data }) => {
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
+  const [sortColumn, setSortColumn] = useState<ColumnKey>("min");
 
-  const sortedData = [...data].sort((a, b) =>
-    sortDirection === "asc" ? a.column1 - b.column1 : b.column1 - a.column1
-  );
+  const compareColumns = (a: RowData, b: RowData) => {
+    const aVal = a[sortColumn];
+    const bVal = b[sortColumn];
+    return sortDirection === "asc" ? aVal - bVal : bVal - aVal;
+  };
 
-  const handleSortToggle = () => {
+  const sortedData = [...data].sort(compareColumns);
+
+  const handleSortToggle = (columnKey: ColumnKey) => {
     setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+    setSortColumn(columnKey);
   };
 
   return (
     <div className="w-full">
-      <div className="flex justify-between items-center px-4 py-2 text-black-100 text-sm font-small tracking-wider">
-        <TableHeaderCell
-          label="Min"
-          onClick={handleSortToggle}
-          sortDirection={sortDirection}
-        />
-        <TableHeaderCell
-          label="Max"
-          onClick={handleSortToggle}
-          sortDirection={sortDirection}
-        />
-        <div className={largeColumn}></div>
-      </div>
+      <ContentHeader
+        sortDirection={sortDirection}
+        onSortToggle={handleSortToggle}
+      />
       {sortedData.map((item) => (
-        <TableRow key={item.column1} data={item} />
+        <ContentRow key={item.min} data={item} />
       ))}
     </div>
   );
 };
 
-export default Summary;
+export default Index;

@@ -1,18 +1,20 @@
-export interface TableData {
-  column1: number;
-  column2: number;
-  column3: string;
+export interface RowData {
+  min: number;
+  max: number;
+  cityName: string;
 }
 
 export interface TableRowProps {
-  data: TableData;
+  data: RowData;
 }
 
 export interface TableProps {
-  data: TableData[];
+  data: RowData[];
 }
+
+export type ColumnKey = "min" | "max";
 
 export interface TableHeaderProps {
   sortDirection: "asc" | "desc";
-  onSortToggle: () => void;
+  onSortToggle: (column: ColumnKey) => void;
 }

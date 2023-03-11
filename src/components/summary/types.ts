@@ -3,3 +3,6 @@ export interface RowData {
   max: number;
   cityName: string;
 }
+
+
+export type ColumnKey = "min" | "max";

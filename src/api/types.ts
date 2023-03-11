@@ -1,11 +1,13 @@
-interface HourlyUnits {
+interface DailyUnits {
   time: string;
-  temperature_2m: string;
+  temperature_2m_max: string;
+  temperature_2m_min: string;
 }
 
-interface Hourly {
+interface Daily {
   time: string[];
-  temperature_2m: number[];
+  temperature_2m_max: number[];
+  temperature_2m_min: number[];
 }
 
 export interface ForecastResponse {
@@ -16,6 +18,6 @@ export interface ForecastResponse {
   timezone: string;
   timezone_abbreviation: string;
   elevation: number;
-  hourly_units: HourlyUnits;
-  hourly: Hourly;
+  daily_units: DailyUnits;
+  daily: Daily;
 }

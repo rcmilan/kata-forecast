@@ -15,7 +15,9 @@ export const getForecast = async (
     params: {
       latitude,
       longitude,
-      hourly: "temperature_2m",
+      daily: "temperature_2m_max,temperature_2m_min",
+      forecast_days: "3",
+      timezone: "America/Sao_Paulo",
     },
   });
   return response.data;

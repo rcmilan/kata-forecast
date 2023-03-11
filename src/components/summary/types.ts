@@ -4,5 +4,6 @@ export interface RowData {
   cityName: string;
 }
 
-
 export type ColumnKey = "min" | "max";
+
+export type SortDirection = "asc" | "desc";

@@ -1,12 +1,21 @@
 import React, { useState } from "react";
 import { BsSortNumericUp, BsSortNumericDown } from "react-icons/bs";
-import {
-  ColumnKey,
-  RowData,
-  TableHeaderProps,
-  TableProps,
-  TableRowProps,
-} from "./types";
+import { RowData } from "./types";
+
+interface TableRowProps {
+  data: RowData;
+}
+
+interface TableProps {
+  data: RowData[];
+}
+
+type ColumnKey = "min" | "max";
+
+interface TableHeaderProps {
+  sortDirection: "asc" | "desc";
+  onSortToggle: (column: ColumnKey) => void;
+}
 
 const smallColumn = "w-1/5";
 const largeColumn = "w-3/5";

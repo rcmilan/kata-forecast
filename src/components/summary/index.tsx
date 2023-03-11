@@ -37,8 +37,8 @@ const Summary: React.FC<Props> = ({ data }) => {
       <Title text="Capitais" />
       <div className="w-full">
         <Header sortDirection={sortDirection} onSortToggle={handleSortToggle} />
-        {sortedData.map((row) => (
-          <Row key={row.cityName} row={row} />
+        {sortedData.map((row, i) => (
+          <Row key={i} row={row} />
         ))}
       </div>
     </>

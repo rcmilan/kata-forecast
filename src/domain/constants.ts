@@ -1,4 +1,4 @@
-export const fixedCities = [
+const defaultCities = [
   { uf: "AC", latlong: [-8.77, -70.55] },
   { uf: "AL", latlong: [-9.71, -35.73] },
   { uf: "AM", latlong: [-3.07, -61.66] },
@@ -27,3 +27,9 @@ export const fixedCities = [
   { uf: "SP", latlong: [-23.55, -46.64] },
   { uf: "TO", latlong: [-10.25, -48.25] },
 ];
+
+export const citiesData = defaultCities.map((city) => ({
+  uf: city.uf,
+  latitude: city.latlong[0],
+  longitude: city.latlong[1],
+}));

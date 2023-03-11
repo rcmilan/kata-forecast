@@ -1,19 +1,13 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { fixedCities } from "./domain/constants";
 import { getForecast } from "./api";
-import { RowData } from "./components/summary/types";
 import Heading from "./components/heading";
 import SearchInput from "./components/searchInput";
 import SummaryTable from "./components/summary";
+import { citiesData } from "./domain/constants";
+import { mapForecastResponseToRowData } from "./domain/mapper";
 
 function App() {
-  const citiesData = fixedCities.map((city) => ({
-    uf: city.uf,
-    latitude: city.latlong[0],
-    longitude: city.latlong[1],
-  }));
-
   const [searchTerm, setSearchTerm] = useState("");
   const { isLoading, isError, data, error } = useQuery(
     ["forecast", citiesData],
@@ -23,10 +17,12 @@ function App() {
           getForecast(latitude, longitude)
         )
       ),
-    { enabled: !!citiesData.length }
+    {
+      enabled: !!citiesData.length,
+      refetchOnWindowFocus: false,
+      staleTime: Infinity,
+    }
   );
-
-  const summaryData: RowData[] = [];
 
   const handleSearchTermChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -39,10 +35,10 @@ function App() {
 
     if (isError) return <>Error: {error}</>;
 
+    const summaryData = data ? data.flatMap(mapForecastResponseToRowData) : [];
+
     return <SummaryTable data={summaryData} />;
   };
-
-  console.log(searchTerm, data);
 
   return (
     <div className="flex flex-col items-center">

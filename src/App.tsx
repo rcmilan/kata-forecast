@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import { getForecast } from "./api";
 import Heading from "./components/heading";
-import SearchInput from "./components/searchInput";
+import SearchCard from "./components/searchCard";
 import SummaryTable from "./components/summary";
 import { citiesData } from "./domain/constants";
 import { mapForecastResponseToRowData } from "./domain/mapper";
@@ -44,7 +44,7 @@ function App() {
     <div className="flex flex-col items-center">
       <Heading>Previsão do tempo</Heading>
       <div className="mt-5 w-2/3">
-        <SearchInput
+        <SearchCard
           placeholder="Insira aqui o nome da cidade"
           onChange={handleSearchTermChange}
         />

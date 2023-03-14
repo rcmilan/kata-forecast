@@ -18,4 +18,12 @@ body {
       to(#ffb700)
     )
     fixed;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+
+
+body::-webkit-scrollbar {
+  width: 0; /* Safari and Chrome */
+  height: 0;
 }

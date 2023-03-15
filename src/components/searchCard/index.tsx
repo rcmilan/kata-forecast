@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import cities from "../../assets/locations.json";
+import cities from "./locations.json";
 import SuggestionList from "./suggestionList";
 import { City, SearchInputProps } from "./types";
 

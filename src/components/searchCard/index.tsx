@@ -1,6 +1,7 @@
 import React, { InputHTMLAttributes, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import cities from "../../assets/locations.json";
+import SuggestionList from "./suggestionList";
 import { City } from "./types";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
@@ -42,13 +43,12 @@ const Index: React.FC<Props> = ({ width = "w-full", ...rest }) => {
       <div className="absolute inset-y-0 right-0 pr-8 flex items-center pointer-events-none">
         <FaSearch className="h-5 w-5 text-gray-400" />
       </div>
-      <ul className="absolute z-50 top-full left-0 w-full bg-white rounded-none max-h-40 overflow-y-auto">
-        {suggestions.map((city, i) => (
-          <li key={i} onClick={() => handleSuggestionClick(city)}>
-            {city.name}
-          </li>
-        ))}
-      </ul>
+      {suggestions.length > 0 && (
+        <SuggestionList
+          suggestions={suggestions}
+          onClick={handleSuggestionClick}
+        />
+      )}
     </div>
   );
 };

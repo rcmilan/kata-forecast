@@ -1,14 +1,10 @@
-import React, { InputHTMLAttributes, useState } from "react";
+import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import cities from "../../assets/locations.json";
 import SuggestionList from "./suggestionList";
-import { City } from "./types";
+import { City, SearchInputProps } from "./types";
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  width?: string;
-}
-
-const Index: React.FC<Props> = ({ width = "w-full", ...rest }) => {
+const Index: React.FC<SearchInputProps> = ({ width = "w-full", ...rest }) => {
   const [inputValue, setInputValue] = useState("");
   const [suggestions, setSuggestions] = useState<City[]>([]);
 
